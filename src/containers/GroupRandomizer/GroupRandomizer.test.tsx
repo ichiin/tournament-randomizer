@@ -1,11 +1,10 @@
-import { render, screen } from "@testing-library/react"
-import GroupRandomizer from "./GroupRandomizer"
+import { render, screen } from "utils/testUtils"
 
 
 describe('GroupRandomizer', () => {
     test('Render the GroupRandomizer page', () => {
-        render(<GroupRandomizer/>)
-        const title = screen.getByText('GroupRandomizer.title')
+        render({route: '/groups'})
+        const title = screen.getByText('Generate your groups')
         expect(title).toBeInTheDocument();
     })
 })
