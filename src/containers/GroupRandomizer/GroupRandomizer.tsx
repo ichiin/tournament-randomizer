@@ -1,7 +1,10 @@
+import { useTranslation } from "react-i18next";
 
 
 const GroupRandomizer = () => {
-    return <div>Ok bra</div>;
+    const { t } = useTranslation();
+
+    return <div>{t("GroupRandomizer.title")}</div>;
 }
 
 export default GroupRandomizer;

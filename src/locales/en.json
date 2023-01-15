@@ -1,6 +1,7 @@
 {
     "GroupRandomizer": {
-        "path": "/groups"
+        "path": "/groups",
+        "title": "Generate your groups"
     },
     "Home": {
         "path": "/",
