@@ -1,20 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { GroupRandomizer, Home } from 'containers';
-import { createBrowserRouter } from 'react-router-dom';
+import { App } from 'containers';
 import reportWebVitals from './reportWebVitals';
-import { RouterProvider } from 'react-router-dom';
+import i18n from 'utils/i18n';
+import { I18nextProvider } from 'react-i18next';
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Home/>,
-  },
-  {
-    path: "/groups",
-    element: <GroupRandomizer/>,
-  }
-])
 
 
 const root = ReactDOM.createRoot(
@@ -22,7 +12,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router}/>
+    <I18nextProvider i18n={i18n}>
+      <App/>
+    </I18nextProvider>
   </React.StrictMode>
 );
 

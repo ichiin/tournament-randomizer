@@ -1,0 +1,9 @@
+{
+    "GroupRandomizer": {
+        "path": "/groups"
+    },
+    "Home": {
+        "path": "/",
+        "title": "Welcome to the generator"
+    }
+}
