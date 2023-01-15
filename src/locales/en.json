@@ -1,5 +1,7 @@
 {
     "GroupRandomizer": {
+        "parametersPlayerNumber": "Number of players per group",
+        "parametersTitle": "Generation settings",
         "path": "/groups",
         "title": "Generate your groups"
     },

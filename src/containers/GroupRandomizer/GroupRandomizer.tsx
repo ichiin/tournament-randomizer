@@ -4,8 +4,16 @@ import useGroupRandomizer from './hooks/useGroupRandomizer';
 
 const GroupRandomizer = () => {
   const { t } = useTranslation();
-  const { addPlayersToList, playerList, playerInput, setPlayerInput } =
-    useGroupRandomizer();
+  const {
+    addPlayersToList,
+    generateGroups,
+    playerList,
+    playersGeneratedGroup,
+    playerInput,
+    playerNumberPerGroup,
+    setPlayerInput,
+    setPlayerNumberPerGroup,
+  } = useGroupRandomizer();
 
   return (
     <>
@@ -25,8 +33,30 @@ const GroupRandomizer = () => {
               <li>{player}</li>
             ))}
           </ul>
+          <div>{t('GroupRandomizer.parametersTitle')}</div>
+          <TextField
+            onChange={(event) =>
+              setPlayerNumberPerGroup(Number.parseInt(event.target.value))
+            }
+            label={t('GroupRandomizer.parametersPlayerNumber')}
+            value={playerNumberPerGroup}
+          />
+          <Button onClick={generateGroups}>Generate</Button>
         </>
       )}
+      {playersGeneratedGroup.length > 0 &&
+        playersGeneratedGroup.map((group, index) => {
+          return (
+            <>
+              <div>Group {index + 1}</div>
+              <ul>
+                {group.map((player) => (
+                  <li>{player}</li>
+                ))}
+              </ul>
+            </>
+          );
+        })}
     </>
   );
 };
