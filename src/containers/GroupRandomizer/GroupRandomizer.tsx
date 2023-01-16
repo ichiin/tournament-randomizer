@@ -1,6 +1,27 @@
 import { TextField, Button } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { Card } from 'components';
 import useGroupRandomizer from './hooks/useGroupRandomizer';
+import { GroupsBackground } from 'assets';
+import styled from '@emotion/styled';
+
+const CardContainer = styled.div`
+  height: 50px;
+`;
+
+const Container = styled.div`
+  padding: 0px 24px;
+  background-color: grey;
+  background: url(${GroupsBackground});
+  height: 100%;
+`;
+
+const PlayerListContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 20px;
+  align-items: stretch;
+`;
 
 const GroupRandomizer = () => {
   const { t } = useTranslation();
@@ -16,7 +37,7 @@ const GroupRandomizer = () => {
   } = useGroupRandomizer();
 
   return (
-    <>
+    <Container>
       <h1>{t('GroupRandomizer.title')}</h1>
       <div>
         <TextField
@@ -28,11 +49,13 @@ const GroupRandomizer = () => {
       </div>
       {playerList.length > 0 && (
         <>
-          <ul>
+          <PlayerListContainer>
             {playerList.map((player) => (
-              <li>{player}</li>
+              <CardContainer>
+                <Card title={player} />
+              </CardContainer>
             ))}
-          </ul>
+          </PlayerListContainer>
           <div>{t('GroupRandomizer.parametersTitle')}</div>
           <TextField
             onChange={(event) =>
@@ -57,7 +80,7 @@ const GroupRandomizer = () => {
             </>
           );
         })}
-    </>
+    </Container>
   );
 };
 
