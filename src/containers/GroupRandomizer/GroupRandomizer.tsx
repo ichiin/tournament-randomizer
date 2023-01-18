@@ -1,26 +1,15 @@
-import { TextField, Button } from '@mui/material';
-import { useTranslation } from 'react-i18next';
-import { Card } from 'components';
-import useGroupRandomizer from './hooks/useGroupRandomizer';
-import { GroupsBackground } from 'assets';
-import styled from '@emotion/styled';
+import { Button, Label, NumberInput } from "components";
 
-const CardContainer = styled.div`
-  height: 50px;
-`;
+import { TextField } from "@mui/material";
+import styled from "@emotion/styled";
+import useGroupRandomizer from "./hooks/useGroupRandomizer";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const Container = styled.div`
   padding: 0px 24px;
   background-color: grey;
-  background: url(${GroupsBackground});
   height: 100%;
-`;
-
-const PlayerListContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  grid-gap: 20px;
-  align-items: stretch;
 `;
 
 const GroupRandomizer = () => {
@@ -35,11 +24,13 @@ const GroupRandomizer = () => {
     setPlayerInput,
     setPlayerNumberPerGroup,
   } = useGroupRandomizer();
+  const [numberOfGroups, setNumberOfGroups] = useState(0);
 
   return (
     <Container>
-      <h1>{t('GroupRandomizer.title')}</h1>
+      <h1>{t("GroupRandomizer.title")}</h1>
       <div>
+        <Label> Player Tag</Label>
         <TextField
           onChange={(event) => setPlayerInput(event.target.value)}
           multiline
@@ -47,25 +38,27 @@ const GroupRandomizer = () => {
         />
         <Button onClick={addPlayersToList}>Add</Button>
       </div>
+      <NumberInput
+        label={"Number of groups"}
+        max={playerList.length}
+        number={numberOfGroups}
+        setNumber={setNumberOfGroups}
+      />
       {playerList.length > 0 && (
-        <>
-          <PlayerListContainer>
-            {playerList.map((player) => (
-              <CardContainer>
-                <Card title={player} />
-              </CardContainer>
-            ))}
-          </PlayerListContainer>
-          <div>{t('GroupRandomizer.parametersTitle')}</div>
+        <ul>
+          {playerList.map((player) => (
+            <li>{player}</li>
+          ))}
+          <div>{t("GroupRandomizer.parametersTitle")}</div>
           <TextField
             onChange={(event) =>
               setPlayerNumberPerGroup(Number.parseInt(event.target.value))
             }
-            label={t('GroupRandomizer.parametersPlayerNumber')}
+            label={t("GroupRandomizer.parametersPlayerNumber")}
             value={playerNumberPerGroup}
           />
           <Button onClick={generateGroups}>Generate</Button>
-        </>
+        </ul>
       )}
       {playersGeneratedGroup.length > 0 &&
         playersGeneratedGroup.map((group, index) => {
