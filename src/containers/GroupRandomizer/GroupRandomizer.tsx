@@ -1,4 +1,4 @@
-import { Button, Label, NumberInput } from "components";
+import { Button, Label, NumberInput, TextInput } from "components";
 
 import { TextField } from "@mui/material";
 import styled from "@emotion/styled";
@@ -30,6 +30,11 @@ const GroupRandomizer = () => {
     <Container>
       <h1>{t("GroupRandomizer.title")}</h1>
       <div>
+        <TextInput
+          label={"Player Tag"}
+          onChange={setPlayerInput}
+          value={playerInput}
+        />
         <Label> Player Tag</Label>
         <TextField
           onChange={(event) => setPlayerInput(event.target.value)}

@@ -1,6 +1,7 @@
 export const colors = {
   dustyRed: "#BC5056",
   lilyWhite: "#EDF7FD",
+  niceBlue: "#247BA0",
 };
 
 export const typography = {

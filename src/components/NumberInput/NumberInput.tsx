@@ -3,12 +3,15 @@ import { colors, typography } from "utils/colors";
 import { Label } from "components";
 import styled from "@emotion/styled";
 
+const LabelContainer = styled.div`
+  margin-bottom: 24px;
+`;
+
 const NumberContainer = styled.div`
   color: ${colors.lilyWhite};
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  margin-top: 32px;
 `;
 const NumberInputContainer = styled.div`
   align-items: center;
@@ -51,7 +54,11 @@ interface NumberInputProps {
 const NumberInput = ({ label, max, number, setNumber }: NumberInputProps) => {
   return (
     <NumberInputContainer>
-      {label && <Label>{label}</Label>}
+      {label && (
+        <LabelContainer>
+          <Label>{label}</Label>
+        </LabelContainer>
+      )}
       <NumberContainer>
         <OperationButton
           disabled={number === 0}
