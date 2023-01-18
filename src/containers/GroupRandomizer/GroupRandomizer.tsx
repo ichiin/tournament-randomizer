@@ -1,6 +1,7 @@
-import { Button, Label, NumberInput, TextInput } from "components";
+import { Button, Label, ListRow, NumberInput, TextInput } from "components";
 
 import { TextField } from "@mui/material";
+import { colors } from "utils/colors";
 import styled from "@emotion/styled";
 import useGroupRandomizer from "./hooks/useGroupRandomizer";
 import { useState } from "react";
@@ -8,7 +9,7 @@ import { useTranslation } from "react-i18next";
 
 const Container = styled.div`
   padding: 0px 24px;
-  background-color: grey;
+  background-color: ${colors.darkJungleGreen};
   height: 100%;
 `;
 
@@ -43,6 +44,7 @@ const GroupRandomizer = () => {
         />
         <Button onClick={addPlayersToList}>Add</Button>
       </div>
+      <ListRow avatar={"ic"} name={"Meidou"} isSeeded={true} />
       <NumberInput
         label={"Number of groups"}
         max={playerList.length}

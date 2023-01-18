@@ -1,4 +1,5 @@
 export const colors = {
+  darkJungleGreen: "#182025",
   dustyRed: "#BC5056",
   lilyWhite: "#EDF7FD",
   niceBlue: "#247BA0",
