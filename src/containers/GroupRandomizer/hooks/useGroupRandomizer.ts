@@ -1,6 +1,6 @@
+import { PlayerApiType, PlayerType } from "utils/types";
 import { useEffect, useState } from "react";
 
-import { PlayerType } from "utils/types";
 import { getRegistratedPlayers } from "containers/api";
 
 const shuffleArray = <T>(array: T[]) => {
@@ -47,14 +47,14 @@ const useGroupRandomizer = () => {
     const fetchPlayers = async () => {
       console.log("getting the list of players from the provided channel...");
       const discordPlayers = await getRegistratedPlayers();
-      const tmp = discordPlayers.map((player: string) => {
+      const players = discordPlayers.map((player: PlayerApiType) => {
         return {
-          avatar: "c",
+          avatar: player.avatar,
           isSeeded: false,
-          name: player,
+          name: player.name,
         };
       });
-      setPlayerList(tmp);
+      setPlayerList(players);
     };
     fetchPlayers();
   }, []);
