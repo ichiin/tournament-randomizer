@@ -1,6 +1,7 @@
 import { Button, List, NumberInput, TextInput } from "components";
 import { colors, typography } from "utils/colors";
 
+import Doughnut from "components/Doughnut/Doughnut";
 import styled from "@emotion/styled";
 import useGroupRandomizer from "./hooks/useGroupRandomizer";
 import { useState } from "react";
@@ -102,6 +103,7 @@ const GroupRandomizer = () => {
           <List label='Player list' items={playerList} />
         </SectionContainer>
         <SectionContainer>
+          <Doughnut data={playerList} />
           <GenerationParameterContainer>
             <GenerationGroupNumberInputContainer>
               <NumberInput
