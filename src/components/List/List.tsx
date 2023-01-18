@@ -1,8 +1,8 @@
-import { Label, ListRow } from "components";
+import { Label, ListRow } from 'components';
 
-import { PlayerType } from "utils/types";
-import { colors } from "utils/colors";
-import styled from "@emotion/styled";
+import { PlayerType } from 'utils/types';
+import { colors } from 'utils/colors';
+import styled from '@emotion/styled';
 
 const ListContainer = styled.ul`
   display: flex;
@@ -30,9 +30,10 @@ const LabelContainer = styled.div`
 interface ListProps {
   label: string;
   items: PlayerType[];
+  toggleIsSeeded?: Function;
 }
 
-const List = ({ label, items }: ListProps) => {
+const List = ({ label, items, toggleIsSeeded }: ListProps) => {
   return (
     <ListContainer>
       {label && (
@@ -42,7 +43,14 @@ const List = ({ label, items }: ListProps) => {
       )}
       {items.map((item) => {
         const { avatar, name, isSeeded } = item;
-        return <ListRow avatar={avatar} name={name} isSeeded={isSeeded} />;
+        return (
+          <ListRow
+            avatar={avatar}
+            name={name}
+            isSeeded={isSeeded}
+            toggleIsSeeded={toggleIsSeeded}
+          />
+        );
       })}
     </ListContainer>
   );

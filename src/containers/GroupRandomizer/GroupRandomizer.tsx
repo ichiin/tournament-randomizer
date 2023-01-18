@@ -1,13 +1,27 @@
-import { Button, List, NumberInput, TextInput } from "components";
-import { colors, typography } from "utils/colors";
+import { Button, List, NumberInput, TextInput } from 'components';
+import { colors, typography } from 'utils/colors';
 
-import Doughnut from "components/Doughnut/Doughnut";
-import styled from "@emotion/styled";
-import useGroupRandomizer from "./hooks/useGroupRandomizer";
-import { useState } from "react";
-import { useTranslation } from "react-i18next";
+import Doughnut from 'components/Doughnut/Doughnut';
+import styled from '@emotion/styled';
+import useGroupRandomizer from './hooks/useGroupRandomizer';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+
+const DoughnutContainer = styled.div`
+  display: flex;
+  margin-bottom: 80px;
+  max-height: 300px;
+  max-width: 300px;
+`;
 
 const SectionContainer = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+`;
+
+const ParameterSectionContainer = styled.div`
+  align-items: center;
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -26,6 +40,7 @@ const GenerationParameterContainer = styled.div`
   align-items: center;
   display: flex;
   flex-direction: column;
+  max-width: 300px;
 `;
 
 const GenerationContentContainer = styled.section`
@@ -80,18 +95,19 @@ const GroupRandomizer = () => {
     groupSize,
     setPlayerInput,
     setGroupSize,
+    toggleIsSeeded,
   } = useGroupRandomizer();
   const [numberOfGroups, setNumberOfGroups] = useState(0);
 
   return (
     <GroupRandomizerContainer>
-      <Title>{t("GroupRandomizer.title")}</Title>
+      <Title>{t('GroupRandomizer.title')}</Title>
       <GenerationContentContainer>
         <SectionContainer>
           <PlayerAddContainer>
             <PlayerAddTextInputContainer>
               <TextInput
-                label={"Player Tag"}
+                label={'Player Tag'}
                 onChange={setPlayerInput}
                 value={playerInput}
               />
@@ -100,14 +116,20 @@ const GroupRandomizer = () => {
               <Button onClick={addPlayersToList}>Add</Button>
             </PlayerAddInputButtonContainer>
           </PlayerAddContainer>
-          <List label='Player list' items={playerList} />
+          <List
+            label='Player list'
+            items={playerList}
+            toggleIsSeeded={toggleIsSeeded}
+          />
         </SectionContainer>
-        <SectionContainer>
-          <Doughnut data={playerList} />
+        <ParameterSectionContainer>
+          <DoughnutContainer>
+            <Doughnut data={playerList} />
+          </DoughnutContainer>
           <GenerationParameterContainer>
             <GenerationGroupNumberInputContainer>
               <NumberInput
-                label={"Group size"}
+                label={'Group size'}
                 max={playerList.length}
                 number={groupSize}
                 setNumber={setGroupSize}
@@ -115,7 +137,7 @@ const GroupRandomizer = () => {
             </GenerationGroupNumberInputContainer>
             <GenerationGroupNumberInputContainer>
               <NumberInput
-                label={"Seeded players per group"}
+                label={'Seeded players per group'}
                 max={playerList.length}
                 number={numberOfGroups}
                 setNumber={setNumberOfGroups}
@@ -123,7 +145,7 @@ const GroupRandomizer = () => {
             </GenerationGroupNumberInputContainer>
             <Button onClick={generateGroups}>Generate</Button>
           </GenerationParameterContainer>
-        </SectionContainer>
+        </ParameterSectionContainer>
       </GenerationContentContainer>
       {playersGeneratedGroup.length > 0 && (
         <GeneratedListsContainer>

@@ -43,6 +43,18 @@ const useGroupRandomizer = () => {
     setPlayersGeneratedGroup(generatedGroups);
   };
 
+  const toggleIsSeeded = ({ avatarURL }: {avatarURL: string}) => {
+    const clonedPlayerList = [...playerList];
+    const newPlayerList = clonedPlayerList.map(player => {
+      let currentPlayer = {...player}
+      if(currentPlayer.avatar === avatarURL){
+        currentPlayer.isSeeded = !currentPlayer.isSeeded;
+      }
+      return currentPlayer;
+    })
+    setPlayerList(newPlayerList)
+  };
+
   useEffect(() => {
     const fetchPlayers = async () => {
       console.log("getting the list of players from the provided channel...");
@@ -68,6 +80,7 @@ const useGroupRandomizer = () => {
     playerList,
     setGroupSize,
     setPlayerInput,
+    toggleIsSeeded
   };
 };
 
