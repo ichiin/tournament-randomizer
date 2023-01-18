@@ -1,10 +1,9 @@
-import { colors, typography } from "utils/colors";
-
 import Label from "components/Label";
 import styled from "@emotion/styled";
 
 const AvatarContainer = styled.div`
   display: flex;
+  color: white;
   justify-content: center;
   padding-right: 24px;
 `;
@@ -17,7 +16,9 @@ const ListRowContainer = styled.li`
 const NameContainer = styled.div`
   flex: 1;
 `;
-const SeedContainer = styled.div``;
+const SeedContainer = styled.div`
+  color: white;
+`;
 
 interface ListRowProps {
   avatar: string;
@@ -32,9 +33,7 @@ const ListRow = ({ avatar, name, isSeeded }: ListRowProps) => {
       <NameContainer>
         <Label>{name}</Label>
       </NameContainer>
-      <SeedContainer>
-        <>{isSeeded ? "yes" : "no"}</>
-      </SeedContainer>
+      <SeedContainer>{isSeeded ? "yes" : "no"}</SeedContainer>
     </ListRowContainer>
   );
 };

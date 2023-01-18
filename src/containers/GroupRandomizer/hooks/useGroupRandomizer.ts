@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+import { PlayerType } from "utils/types";
 import { getRegistratedPlayers } from "containers/api";
 
 const shuffleArray = <T>(array: T[]) => {
@@ -14,33 +15,27 @@ const shuffleArray = <T>(array: T[]) => {
 
 const useGroupRandomizer = () => {
   const [playerInput, setPlayerInput] = useState("");
-  const [playerList, setPlayerList] = useState<string[]>([]);
+  const [playerList, setPlayerList] = useState<PlayerType[]>([]);
   const [playersGeneratedGroup, setPlayersGeneratedGroup] = useState<
-    string[][]
+    PlayerType[][]
   >([]);
-  const [playerNumberPerGroup, setPlayerNumberPerGroup] = useState<number>();
+  const [groupSize, setGroupSize] = useState<number>(16);
 
   const addPlayersToList = () => {
-    const playersArray = playerInput.split("\n");
-    const hasMultiplePlayers = playersArray.length > 1;
-    if (hasMultiplePlayers) {
-      setPlayerList([...playerList, ...playersArray]);
-    } else {
-      setPlayerList([...playerList, playerInput]);
-    }
+    const playersNames = playerInput.split("\n");
+    const players: PlayerType[] = playersNames.map((name) => {
+      return { avatar: "def", isSeeded: false, name };
+    });
+    setPlayerList([...playerList, ...players]);
     setPlayerInput("");
   };
 
   const generateGroups = () => {
-    const shuffledPlayersList = shuffleArray(playerList);
-    let generatedGroups: string[][] = [];
-    if (playerNumberPerGroup) {
-      for (
-        let i = 0;
-        i < shuffledPlayersList.length;
-        i += playerNumberPerGroup
-      ) {
-        const group = shuffledPlayersList.slice(i, i + playerNumberPerGroup);
+    const shuffledPlayersList = shuffleArray([...playerList]);
+    let generatedGroups: PlayerType[][] = [];
+    if (groupSize) {
+      for (let i = 0; i < shuffledPlayersList.length; i += groupSize) {
+        const group = shuffledPlayersList.slice(i, i + groupSize);
         generatedGroups.push(group);
       }
     }
@@ -52,7 +47,14 @@ const useGroupRandomizer = () => {
     const fetchPlayers = async () => {
       console.log("getting the list of players from the provided channel...");
       const discordPlayers = await getRegistratedPlayers();
-      setPlayerList(discordPlayers);
+      const tmp = discordPlayers.map((player: string) => {
+        return {
+          avatar: "c",
+          isSeeded: false,
+          name: player,
+        };
+      });
+      setPlayerList(tmp);
     };
     fetchPlayers();
   }, []);
@@ -60,12 +62,12 @@ const useGroupRandomizer = () => {
   return {
     addPlayersToList,
     generateGroups,
+    groupSize,
     playersGeneratedGroup,
     playerInput,
     playerList,
-    playerNumberPerGroup,
+    setGroupSize,
     setPlayerInput,
-    setPlayerNumberPerGroup,
   };
 };
 

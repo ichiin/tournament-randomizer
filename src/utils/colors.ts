@@ -6,7 +6,8 @@ export const colors = {
 };
 
 export const typography = {
-  button: { fontWeight: 700, fontSize: "32px" },
+  button: { fontWeight: 700, fontSize: "24px" },
   label: { fontWeight: 400, fontSize: "20px" },
   numbers: { fontWeight: 700, fontSize: "40px" },
+  title: { fontWeight: 400, fontSize: "48px" },
 };
