@@ -1,5 +1,7 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Label from "components/Label";
 import { colors } from "utils/colors";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 import styled from "@emotion/styled";
 
 const AvatarImage = styled.img`
@@ -21,7 +23,7 @@ const ListRowContainer = styled.li`
 const NameContainer = styled.div`
   flex: 1;
 `;
-const SeedContainer = styled.div`
+const IconsContainer = styled.div`
   color: white;
 `;
 
@@ -38,7 +40,9 @@ const ListRow = ({ avatar, name, isSeeded }: ListRowProps) => {
       <NameContainer>
         <Label>{name}</Label>
       </NameContainer>
-      <SeedContainer>{isSeeded ? "yes" : "no"}</SeedContainer>
+      <IconsContainer>
+        <FontAwesomeIcon icon={faStar} size='lg' border />
+      </IconsContainer>
     </ListRowContainer>
   );
 };

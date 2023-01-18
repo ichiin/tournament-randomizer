@@ -42,7 +42,7 @@ const List = ({ label, items }: ListProps) => {
       )}
       {items.map((item) => {
         const { avatar, name, isSeeded } = item;
-        return <ListRow avatar={avatar} isSeeded={isSeeded} name={name} />;
+        return <ListRow avatar={avatar} name={name} isSeeded={isSeeded} />;
       })}
     </ListContainer>
   );
