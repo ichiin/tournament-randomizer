@@ -1,7 +1,13 @@
-import { Button, List, NumberInput, TextInput } from 'components';
+import {
+  Button,
+  List,
+  NumberInput,
+  TextInput,
+  Group,
+  Doughnut,
+} from 'components';
 import { colors, typography } from 'utils/colors';
 
-import Doughnut from 'components/Doughnut/Doughnut';
 import styled from '@emotion/styled';
 import useGroupRandomizer from './hooks/useGroupRandomizer';
 import { useState } from 'react';
@@ -29,11 +35,16 @@ const ParameterSectionContainer = styled.div`
 
 const GeneratedListsContainer = styled.section`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 100px;
 `;
 
 const GeneratedList = styled.div`
   flex: 1;
+  justify-content: center;
+  margin-bottom: 40px;
 `;
 
 const GenerationParameterContainer = styled.div`
@@ -78,10 +89,11 @@ const PlayerAddTextInputContainer = styled.div`
 
 const Title = styled.h1`
   color: ${colors.lilyWhite};
-  fontsize: ${typography.title.fontSize};
-  fontweight: ${typography.title.fontWeight};
-  margin-top: 24px;
-  margin-bottom: 48px;
+  font-size: ${typography.title.fontSize};
+  font-weight: ${typography.title.fontWeight};
+  margin: 0;
+  padding-top: 48px;
+  padding-bottom: 48px;
 `;
 
 const GroupRandomizer = () => {
@@ -151,7 +163,7 @@ const GroupRandomizer = () => {
         <GeneratedListsContainer>
           {playersGeneratedGroup.map((group) => (
             <GeneratedList>
-              <List label='Player list' items={group} />
+              <Group label='Player list' items={group} />
             </GeneratedList>
           ))}
         </GeneratedListsContainer>

@@ -1,7 +1,7 @@
 import { PlayerApiType, PlayerType } from "utils/types";
 import { useEffect, useState } from "react";
 
-import { getRegistratedPlayers } from "containers/api";
+import { getRegistratedPlayers } from "api";
 
 const shuffleArray = <T>(array: T[]) => {
   for (let i = array.length - 1; i > 0; i--) {
