@@ -1,7 +1,10 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Label from 'components/Label';
 import { colors } from 'utils/colors';
-import { faStar as faStarSolid } from '@fortawesome/free-solid-svg-icons';
+import {
+  faStar as faStarSolid,
+  faXmark,
+} from '@fortawesome/free-solid-svg-icons';
 import { faStar as faStarRegular } from '@fortawesome/free-regular-svg-icons';
 import styled from '@emotion/styled';
 
@@ -34,17 +37,25 @@ const IconContainer = styled.div`
 `;
 
 const IconsContainer = styled.div`
-  color: white;
+  align-items: center;
+  display: flex;
 `;
 
 interface ListRowProps {
   avatar: string;
+  deletePlayer?: Function;
   name: string;
   isSeeded: boolean;
   toggleIsSeeded?: Function;
 }
 
-const ListRow = ({ avatar, name, isSeeded, toggleIsSeeded }: ListRowProps) => {
+const ListRow = ({
+  avatar,
+  deletePlayer,
+  name,
+  isSeeded,
+  toggleIsSeeded,
+}: ListRowProps) => {
   return (
     <ListRowContainer>
       <AvatarImage src={avatar} />
@@ -61,9 +72,21 @@ const ListRow = ({ avatar, name, isSeeded, toggleIsSeeded }: ListRowProps) => {
               }
             }}
             icon={isSeeded ? faStarSolid : faStarRegular}
-            size='lg'
+            size='1x'
           />
         </IconContainer>
+        {deletePlayer && (
+          <IconContainer>
+            <FontAwesomeIcon
+              color={colors.dustyRed}
+              onClick={() => {
+                deletePlayer({ avatarURL: avatar });
+              }}
+              icon={faXmark}
+              size='2x'
+            />
+          </IconContainer>
+        )}
       </IconsContainer>
     </ListRowContainer>
   );

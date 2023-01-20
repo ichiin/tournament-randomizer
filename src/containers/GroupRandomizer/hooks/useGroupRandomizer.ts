@@ -30,6 +30,18 @@ const useGroupRandomizer = () => {
     setPlayerInput("");
   };
 
+  const deletePlayer = ({ avatarURL }: {avatarURL: string}) => {
+    const clonedPlayerList = [...playerList];
+    const newPlayerList = clonedPlayerList.filter(player => {
+      let currentPlayer = {...player}
+      if(currentPlayer.avatar === avatarURL){
+        return false
+      }
+      return true;
+    })
+    setPlayerList(newPlayerList)
+  };
+
   const generateGroups = () => {
     const shuffledPlayersList = shuffleArray([...playerList]);
     let generatedGroups: PlayerType[][] = [];
@@ -39,7 +51,6 @@ const useGroupRandomizer = () => {
         generatedGroups.push(group);
       }
     }
-    console.log(generatedGroups);
     setPlayersGeneratedGroup(generatedGroups);
   };
 
@@ -73,6 +84,7 @@ const useGroupRandomizer = () => {
 
   return {
     addPlayersToList,
+    deletePlayer,
     generateGroups,
     groupSize,
     playersGeneratedGroup,

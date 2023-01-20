@@ -100,6 +100,7 @@ const GroupRandomizer = () => {
   const { t } = useTranslation();
   const {
     addPlayersToList,
+    deletePlayer,
     generateGroups,
     playerList,
     playersGeneratedGroup,
@@ -110,6 +111,7 @@ const GroupRandomizer = () => {
     toggleIsSeeded,
   } = useGroupRandomizer();
   const [numberOfGroups, setNumberOfGroups] = useState(0);
+  console.log(playerList.length);
 
   return (
     <GroupRandomizerContainer>
@@ -129,6 +131,7 @@ const GroupRandomizer = () => {
             </PlayerAddInputButtonContainer>
           </PlayerAddContainer>
           <List
+            deletePlayer={deletePlayer}
             label='Player list'
             items={playerList}
             toggleIsSeeded={toggleIsSeeded}
@@ -161,9 +164,12 @@ const GroupRandomizer = () => {
       </GenerationContentContainer>
       {playersGeneratedGroup.length > 0 && (
         <GeneratedListsContainer>
-          {playersGeneratedGroup.map((group) => (
+          {playersGeneratedGroup.map((group, index) => (
             <GeneratedList>
-              <Group label='Player list' items={group} />
+              <Group
+                label={`Lobby ${String.fromCharCode(97 + index).toUpperCase()}`}
+                items={group}
+              />
             </GeneratedList>
           ))}
         </GeneratedListsContainer>

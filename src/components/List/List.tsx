@@ -28,12 +28,13 @@ const LabelContainer = styled.div`
 `;
 
 interface ListProps {
+  deletePlayer?: Function;
   label: string;
   items: PlayerType[];
   toggleIsSeeded?: Function;
 }
 
-const List = ({ label, items, toggleIsSeeded }: ListProps) => {
+const List = ({ deletePlayer, label, items, toggleIsSeeded }: ListProps) => {
   return (
     <ListContainer>
       {label && (
@@ -46,6 +47,7 @@ const List = ({ label, items, toggleIsSeeded }: ListProps) => {
         return (
           <ListRow
             avatar={avatar}
+            deletePlayer={deletePlayer}
             name={name}
             isSeeded={isSeeded}
             toggleIsSeeded={toggleIsSeeded}

@@ -38,6 +38,7 @@ interface PluginType {
 
 const Doughnut = ({ data }: DoughnutProps) => {
   const chartData = useMemo(() => convertPlayerData(data), [data]);
+  // TODO: fix this part to print the number in the center
   const plugin = {
     id: 'custom_number_center',
     beforeDraw: function (chart: any) {
