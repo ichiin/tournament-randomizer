@@ -106,12 +106,14 @@ const GroupRandomizer = () => {
     playersGeneratedGroup,
     playerInput,
     groupSize,
+    seededPlayersPerGroup,
     setPlayerInput,
     setGroupSize,
+    setSeededPlayersPerGroup,
     toggleIsSeeded,
   } = useGroupRandomizer();
-  const [numberOfGroups, setNumberOfGroups] = useState(0);
-  console.log(playerList.length);
+
+  console.log(playerList);
 
   return (
     <GroupRandomizerContainer>
@@ -154,8 +156,8 @@ const GroupRandomizer = () => {
               <NumberInput
                 label={'Seeded players per group'}
                 max={playerList.length}
-                number={numberOfGroups}
-                setNumber={setNumberOfGroups}
+                number={seededPlayersPerGroup}
+                setNumber={setSeededPlayersPerGroup}
               />
             </GenerationGroupNumberInputContainer>
             <Button onClick={generateGroups}>Generate</Button>
