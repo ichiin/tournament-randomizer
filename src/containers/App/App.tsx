@@ -11,6 +11,7 @@ import { colors } from 'utils/colors';
 import { createBrowserRouter } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { useTranslation } from 'react-i18next';
+import useApp from './hooks/useApp';
 
 const Container = styled.div`
   height: 100%;
@@ -21,6 +22,9 @@ const Container = styled.div`
 
 const App = () => {
   const { t } = useTranslation();
+  const { setTournament, tournament, tournaments } = useApp();
+
+  console.log(tournaments);
 
   const router = createBrowserRouter([
     {
@@ -33,15 +37,17 @@ const App = () => {
     },
     {
       path: t('Tournaments.path') || '/tournaments',
-      element: <Tournaments />,
+      element: <Tournaments tournaments={tournaments} />,
     },
     {
       path: t('Tournament.path') || '/tournament/:id',
-      element: <Tournament />,
+      element: (
+        <Tournament setTournament={setTournament} tournament={tournament} />
+      ),
     },
     {
       path: t('Group.path') || '/tournament/:tid/group/:gid',
-      element: <Group />,
+      element: <Group tournament={tournament} />,
     },
     {
       path:
