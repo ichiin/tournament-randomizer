@@ -1,4 +1,11 @@
-import { GroupRandomizer, Home } from 'containers';
+import {
+  GameResult,
+  Group,
+  GroupRandomizer,
+  Home,
+  Tournament,
+  Tournaments,
+} from 'containers';
 import { RouterProvider } from 'react-router-dom';
 import { colors } from 'utils/colors';
 import { createBrowserRouter } from 'react-router-dom';
@@ -21,8 +28,25 @@ const App = () => {
       element: <Home />,
     },
     {
-      path: t('GroupRandomizer.path') || '/groups',
+      path: t('GroupRandomizer.path') || '/randomize',
       element: <GroupRandomizer />,
+    },
+    {
+      path: t('Tournaments.path') || '/tournaments',
+      element: <Tournaments />,
+    },
+    {
+      path: t('Tournament.path') || '/tournament/:id',
+      element: <Tournament />,
+    },
+    {
+      path: t('Group.path') || '/tournament/:tid/group/:gid',
+      element: <Group />,
+    },
+    {
+      path:
+        t('GameResult.path') || '/tournament/:tid/group/:gid/gameresult/:rid',
+      element: <GameResult />,
     },
   ]);
 

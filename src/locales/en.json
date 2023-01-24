@@ -1,12 +1,28 @@
 {
-    "GroupRandomizer": {
-        "parametersPlayerNumber": "Number of players per group",
-        "parametersTitle": "Generation settings",
-        "path": "/groups",
-        "title": "Generate your groups"
-    },
-    "Home": {
-        "path": "/",
-        "title": "Welcome to the generator"
-    }
+  "GameResult": {
+    "path": "/tournament/:tid/group/:gid/gameresult/:rid",
+    "title": ""
+  },
+  "Group": {
+    "path": "/tournament/:tid/group/:gid",
+    "title": ""
+  },
+  "GroupRandomizer": {
+    "parametersPlayerNumber": "Number of players per group",
+    "parametersTitle": "Generation settings",
+    "path": "/randomize",
+    "title": "Generate your groups"
+  },
+  "Home": {
+    "path": "/",
+    "title": "Welcome to the generator"
+  },
+  "Tournament": {
+    "path": "/tournament/:id",
+    "title": ""
+  },
+  "Tournaments": {
+    "path": "/tournaments",
+    "title": ""
+  }
 }
