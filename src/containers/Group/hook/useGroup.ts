@@ -11,9 +11,17 @@ const useGroup = ({ tournament }: useGroupProps) => {
   // Last element of the URL is the group id
   const groupId = Number.parseInt(splitPath[splitPath.length - 1]);
   const group = tournament.groups?.find((group) => group.id === groupId);
+  const results =
+    group?.standings.map((player) => {
+      return {
+        name: player.playerName,
+        score: player.score,
+      };
+    }) || [];
 
   return {
     group,
+    results,
   };
 };
 

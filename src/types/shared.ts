@@ -7,6 +7,7 @@ export interface GroupType {
   games: GameType[];
   id: number;
   name: string;
+  standings: StandingType[];
 }
 
 export interface PointPlayerType {
@@ -18,12 +19,12 @@ export interface PointPlayerType {
 }
 
 export interface StandingType {
-  killCount: number;
+  killCount?: number;
   playerName: string;
-  rank: number;
+  rank?: number;
   score: number;
-  teamId: number;
-  totalHurt: number;
+  teamId?: number;
+  totalHurt?: number;
 }
 
 export interface TournamentType {
