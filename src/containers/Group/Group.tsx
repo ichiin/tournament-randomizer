@@ -2,12 +2,14 @@ import { useNavigate } from 'react-router-dom';
 import { TournamentType } from 'types';
 import { Button } from 'components';
 import useGroup from './hook/useGroup';
+import { useTranslation } from 'react-i18next';
 
 interface GroupProps {
   tournament: TournamentType;
 }
 const Group = ({ tournament }: GroupProps) => {
   const { group } = useGroup({ tournament });
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   return (
@@ -22,7 +24,11 @@ const Group = ({ tournament }: GroupProps) => {
               key={game.id}
               onClick={() =>
                 navigate(
-                  `/tournament/${tournament.id}/group/${group.id}/gameresult/${game.id}`
+                  t('GameResult.to', {
+                    tid: tournament.id,
+                    gid: group.id,
+                    rid: game.id,
+                  }) || ''
                 )
               }
             >

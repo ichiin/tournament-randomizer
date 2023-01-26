@@ -1,11 +1,13 @@
 {
   "GameResult": {
     "path": "/tournament/:tid/group/:gid/gameresult/:rid",
-    "title": ""
+    "title": "",
+    "to": "/tournament/{{tid}}/group/{{gid}}/gameresult/{{rid}}"
   },
   "Group": {
     "path": "/tournament/:tid/group/:gid",
-    "title": ""
+    "title": "",
+    "to": "/tournament/{{tid}}/group/{{gid}}"
   },
   "GroupRandomizer": {
     "parametersPlayerNumber": "Number of players per group",
@@ -18,8 +20,9 @@
     "title": "Welcome to the generator"
   },
   "Tournament": {
-    "path": "/tournament/:id",
-    "title": ""
+    "path": "/tournament/:tid",
+    "title": "",
+    "to": "/tournament/{{tid}}"
   },
   "Tournaments": {
     "path": "/tournaments",

@@ -1,4 +1,5 @@
 import { Button } from 'components';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { TournamentType } from 'types';
 
@@ -7,6 +8,7 @@ interface TournamentsProps {
 }
 
 const Tournaments = ({ tournaments }: TournamentsProps) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   return (
     <>
@@ -14,7 +16,9 @@ const Tournaments = ({ tournaments }: TournamentsProps) => {
         tournaments.map((tournament) => (
           <Button
             key={tournament.id}
-            onClick={() => navigate(`/tournament/${tournament.id}`)}
+            onClick={() =>
+              navigate(t('Tournament.to', { tid: tournament.id }) || '')
+            }
           >
             {tournament.name}
           </Button>

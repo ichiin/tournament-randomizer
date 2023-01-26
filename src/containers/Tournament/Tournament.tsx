@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { getTournament } from 'api/database';
 import { TournamentType } from 'types';
 import { Button } from 'components';
+import { useTranslation } from 'react-i18next';
 
 interface TournamentProps {
   setTournament: Function;
@@ -10,6 +11,7 @@ interface TournamentProps {
 }
 const Tournament = ({ setTournament, tournament }: TournamentProps) => {
   const { pathname } = useLocation();
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -34,7 +36,9 @@ const Tournament = ({ setTournament, tournament }: TournamentProps) => {
               <Button
                 key={group.id}
                 onClick={() =>
-                  navigate(`/tournament/${tournament.id}/group/${group.id}`)
+                  navigate(
+                    t('Group.to', { tid: tournament.id, gid: group.id }) || ''
+                  )
                 }
               >
                 {group.name}
