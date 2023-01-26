@@ -1,7 +1,7 @@
 {
   "GameResult": {
     "path": "/tournament/:tid/group/:gid/gameresult/:rid",
-    "title": "",
+    "title": "Game {{id}}",
     "to": "/tournament/{{tid}}/group/{{gid}}/gameresult/{{rid}}"
   },
   "Group": {

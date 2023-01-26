@@ -52,7 +52,7 @@ const App = () => {
     {
       path:
         t('GameResult.path') || '/tournament/:tid/group/:gid/gameresult/:rid',
-      element: <GameResult />,
+      element: <GameResult tournament={tournament} />,
     },
   ]);
 

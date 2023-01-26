@@ -21,6 +21,7 @@ export interface StandingType {
   killCount: number;
   playerName: string;
   rank: number;
+  score: number;
   teamId: number;
   totalHurt: number;
 }
