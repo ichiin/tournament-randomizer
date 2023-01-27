@@ -16,21 +16,21 @@ import {
 import styled from '@emotion/styled';
 import { colors } from 'utils/colors';
 
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: colors.dustyRed,
-    color: colors.darkJungleGreen,
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-  },
-}));
-
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   backgroundColor: colors.lilyWhite,
   // hide last border
   '&:last-child td, &:last-child th': {
     border: 0,
+  },
+}));
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: colors.dustyRed,
+    color: colors.lilyWhite,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
   },
 }));
 
@@ -43,7 +43,7 @@ interface GroupProps {
 }
 
 const Group = ({ tournament }: GroupProps) => {
-  const { group, results } = useGroup({ tournament });
+  const { group, parseFile, results } = useGroup({ tournament });
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -70,6 +70,20 @@ const Group = ({ tournament }: GroupProps) => {
               Game {game.id}
             </Button>
           ))}
+          <label>Upload Game results below</label>
+          <input
+            accept='.csv'
+            onChange={(e) => {
+              if (e.target.files)
+                parseFile({
+                  file: e.target.files[0],
+                  gameId: group.games.length + 1,
+                  groupId: group.id,
+                  tournamentId: tournament.id!,
+                });
+            }}
+            type='file'
+          />
           <ResultContainer>
             <TableContainer>
               <Table
@@ -79,9 +93,12 @@ const Group = ({ tournament }: GroupProps) => {
               >
                 <TableHead>
                   <StyledTableRow>
-                    <TableCell>Rank</TableCell>
-                    <TableCell>Name</TableCell>
-                    <TableCell>Score</TableCell>
+                    <StyledTableCell>Rank</StyledTableCell>
+                    <StyledTableCell>Name</StyledTableCell>
+                    {group.games.map((game) => (
+                      <StyledTableCell>Game {game.id}</StyledTableCell>
+                    ))}
+                    <StyledTableCell>Score</StyledTableCell>
                   </StyledTableRow>
                 </TableHead>
                 <TableBody>
@@ -90,11 +107,19 @@ const Group = ({ tournament }: GroupProps) => {
                       key={player.name}
                       sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                     >
-                      <StyledTableCell component='th' scope='row'>
-                        {index + 1}
-                      </StyledTableCell>
-                      <StyledTableCell>{player.name}</StyledTableCell>
-                      <StyledTableCell>{player.score}</StyledTableCell>
+                      <TableCell component='th' scope='row'>
+                        {`#${index + 1}`}
+                      </TableCell>
+                      <TableCell>{player.name}</TableCell>
+                      {group.games.map((game) => (
+                        <TableCell>
+                          {game.standings.find(
+                            (gamePlayer) =>
+                              gamePlayer.playerName === player.name
+                          )?.score || '-'}
+                        </TableCell>
+                      ))}
+                      <TableCell>{player.score}</TableCell>
                     </StyledTableRow>
                   ))}
                 </TableBody>

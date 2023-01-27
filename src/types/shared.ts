@@ -37,3 +37,11 @@ export interface TournamentType {
   standings?: StandingType[];
   status?: string;
 }
+
+export interface CSVGameResultType {
+  KillCount: number;
+  PlayerName: string;
+  Rank: number;
+  TeamId: number;
+  TotalHurt: number;
+}

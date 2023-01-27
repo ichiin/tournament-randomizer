@@ -1,5 +1,7 @@
 import { useLocation } from 'react-router-dom';
-import { TournamentType } from 'types';
+import { TournamentType, CSVGameResultType } from 'types';
+import Papa from 'papaparse';
+import { uploadGameResult } from 'api/database';
 
 interface useGroupProps {
   tournament: TournamentType;
@@ -19,8 +21,41 @@ const useGroup = ({ tournament }: useGroupProps) => {
       };
     }) || [];
 
+  const parseFile = async ({
+    file,
+    gameId,
+    groupId,
+    tournamentId,
+  }: {
+    file: File;
+    gameId: number;
+    groupId: number;
+    tournamentId: number;
+  }) => {
+    console.log(file);
+    Papa.parse(file, {
+      header: true,
+      complete: function (results) {
+        const gameResult: CSVGameResultType[] = results.data
+          .map((row: any) => {
+            console.log(row);
+            return {
+              KillCount: parseInt(row.KillCount),
+              PlayerName: row.PlayerName,
+              Rank: parseInt(row.Rank),
+              TeamId: parseInt(row.TeamID),
+              TotalHurt: parseInt(row.TotalHurt),
+            };
+          })
+          .filter((row) => row.PlayerName);
+        uploadGameResult({ gameResult, gameId, groupId });
+      },
+    });
+  };
+
   return {
     group,
+    parseFile,
     results,
   };
 };
