@@ -47,7 +47,7 @@ const App = () => {
     },
     {
       path: t('Group.path') || '/tournament/:tid/group/:gid',
-      element: <Group tournament={tournament} />,
+      element: <Group setTournament={setTournament} tournament={tournament} />,
     },
     {
       path:

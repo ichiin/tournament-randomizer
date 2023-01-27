@@ -3,6 +3,7 @@ import { TournamentType } from 'types';
 import { Button } from 'components';
 import useGroup from './hook/useGroup';
 import { useTranslation } from 'react-i18next';
+import * as htmlToImage from 'html-to-image';
 import {
   Table,
   TableContainer,
@@ -15,6 +16,7 @@ import {
 
 import styled from '@emotion/styled';
 import { colors } from 'utils/colors';
+const download = require('downloadjs');
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   backgroundColor: colors.lilyWhite,
@@ -39,10 +41,11 @@ const ResultContainer = styled.div`
 `;
 
 interface GroupProps {
+  setTournament: Function;
   tournament: TournamentType;
 }
 
-const Group = ({ tournament }: GroupProps) => {
+const Group = ({ setTournament, tournament }: GroupProps) => {
   const { group, parseFile, results } = useGroup({ tournament });
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -79,13 +82,25 @@ const Group = ({ tournament }: GroupProps) => {
                   file: e.target.files[0],
                   gameId: group.games.length + 1,
                   groupId: group.id,
+                  setTournament,
                   tournamentId: tournament.id!,
                 });
             }}
             type='file'
           />
           <ResultContainer>
-            <TableContainer>
+            <Button
+              onClick={() => {
+                htmlToImage
+                  .toPng(document.getElementById('result-table')!)
+                  .then(function (dataUrl) {
+                    download(dataUrl, 'results.png');
+                  });
+              }}
+            >
+              Download Result Image
+            </Button>
+            <TableContainer id='result-table' style={{ overflow: 'hidden' }}>
               <Table
                 size='small'
                 sx={{ minWidth: 650 }}
