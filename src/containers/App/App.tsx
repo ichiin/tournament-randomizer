@@ -6,25 +6,23 @@ import {
   Tournament,
   Tournaments,
 } from 'containers';
-import { RouterProvider } from 'react-router-dom';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+
 import { colors } from 'utils/colors';
-import { createBrowserRouter } from 'react-router-dom';
 import styled from '@emotion/styled';
-import { useTranslation } from 'react-i18next';
 import useApp from './hooks/useApp';
+import { useTranslation } from 'react-i18next';
 
 const Container = styled.div`
-  height: 100%;
-  font-family: 'Lato', sans-serif;
   background-color: ${colors.darkJungleGreen};
+  font-family: 'Lato', sans-serif;
   font-weight: 400;
+  height: 100%;
 `;
 
 const App = () => {
   const { t } = useTranslation();
   const { setTournament, tournament, tournaments } = useApp();
-
-  console.log(tournaments);
 
   const router = createBrowserRouter([
     {

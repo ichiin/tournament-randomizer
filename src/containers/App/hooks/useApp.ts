@@ -1,5 +1,6 @@
-import { getTournaments } from 'api/database';
 import { useEffect, useState } from 'react';
+
+import { getTournaments } from 'api/database';
 
 const useApp = () => {
   const [tournament, setTournament] = useState({});
