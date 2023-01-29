@@ -3,14 +3,6 @@ import { Label, ListRow } from 'components';
 import { PlayerType } from 'utils/types';
 import styled from '@emotion/styled';
 
-const LabelContainer = styled.div`
-  margin-bottom: 8px;
-`;
-
-const ListCell = styled.div`
-  width: 300px;
-`;
-
 const GroupContainer = styled.div``;
 
 const GroupPlayersContainer = styled.div`
@@ -20,12 +12,20 @@ const GroupPlayersContainer = styled.div`
   flex-wrap: wrap;
 `;
 
+const LabelContainer = styled.div`
+  margin-bottom: 8px;
+`;
+
+const ListCell = styled.div`
+  width: 300px;
+`;
+
 interface GroupProps {
-  label: string;
   items: PlayerType[];
+  label: string;
 }
 
-const Group = ({ label, items }: GroupProps) => {
+const Group = ({ items, label }: GroupProps) => {
   return (
     <GroupContainer>
       {label && (
@@ -35,7 +35,7 @@ const Group = ({ label, items }: GroupProps) => {
       )}
       <GroupPlayersContainer>
         {items.map((item) => {
-          const { avatar, name, isSeeded } = item;
+          const { avatar, isSeeded, name } = item;
           return (
             <ListCell>
               <ListRow avatar={avatar} name={name} isSeeded={isSeeded} />;
