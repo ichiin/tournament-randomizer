@@ -1,7 +1,7 @@
-import { colors, typography } from "utils/colors";
+import { colors, typography } from 'utils/colors';
 
-import { Label } from "components";
-import styled from "@emotion/styled";
+import { Label } from 'components';
+import styled from '@emotion/styled';
 
 const Input = styled.textarea`
   border: 3px solid ${colors.niceBlue};
