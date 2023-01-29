@@ -1,14 +1,16 @@
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
-import { getTournament } from 'api/database';
-import { TournamentType } from 'types';
+
 import { Button } from 'components';
+import { TournamentType } from 'types';
+import { getTournament } from 'api/database';
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 interface TournamentProps {
   setTournament: Function;
   tournament: TournamentType;
 }
+
 const Tournament = ({ setTournament, tournament }: TournamentProps) => {
   const { pathname } = useLocation();
   const { t } = useTranslation();
@@ -24,10 +26,10 @@ const Tournament = ({ setTournament, tournament }: TournamentProps) => {
     };
     fetchTournament();
   }, [pathname, setTournament]);
-  console.log(tournament);
+
   return (
     <>
-      {Object.keys(tournament).length > 0 ? (
+      {Object.keys(tournament).length > 0 && (
         <div>
           <h1>{tournament.name}</h1>
           {tournament.groups &&
@@ -45,8 +47,6 @@ const Tournament = ({ setTournament, tournament }: TournamentProps) => {
               </Button>
             ))}
         </div>
-      ) : (
-        <div>Error fetching tournament</div>
       )}
     </>
   );
