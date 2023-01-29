@@ -1,15 +1,14 @@
 import axios from 'axios';
 import { CSVGameResultType } from 'types';
-
-const BASE_ENDPOINT = 'http://localhost:5000';
+import { BACK_ENDPOINT } from 'utils/config';
 
 export const getTournament = async ({ id }: { id: number }) => {
-  const tournament = await axios.get(`${BASE_ENDPOINT}/tournament/${id}`);
+  const tournament = await axios.get(`${BACK_ENDPOINT}/tournament/${id}`);
   return tournament.data;
 };
 
 export const getTournaments = async () => {
-  const tournaments = await axios.get(`${BASE_ENDPOINT}/tournaments`);
+  const tournaments = await axios.get(`${BACK_ENDPOINT}/tournaments`);
   return tournaments.data;
 };
 
@@ -24,7 +23,7 @@ export const uploadGameResult = async ({
 }) => {
   console.log(gameResult);
   await axios.post(
-    `${BASE_ENDPOINT}/gameresult`,
+    `${BACK_ENDPOINT}/gameresult`,
     {
       gameResult,
       gameId,

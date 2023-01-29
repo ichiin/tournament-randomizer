@@ -131,7 +131,12 @@ const Group = ({ setTournament, tournament }: GroupProps) => {
                           {game.standings.find(
                             (gamePlayer) =>
                               gamePlayer.playerName === player.name
-                          )?.score || '-'}
+                          )
+                            ? game.standings.find(
+                                (gamePlayer) =>
+                                  gamePlayer.playerName === player.name
+                              )?.score
+                            : '-'}
                         </TableCell>
                       ))}
                       <TableCell>{player.score}</TableCell>
