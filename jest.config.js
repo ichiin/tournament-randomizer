@@ -1,6 +1,3 @@
 module.exports = {
-    moduleDirectories: [
-      'node_modules',
-      'utils',
-    ],
-  }
+  moduleDirectories: ['node_modules', 'utils'],
+};
