@@ -13,13 +13,13 @@ const ListContainer = styled.ul`
   &::-webkit-scrollbar {
     width: 0.5rem;
   }
-  &::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 0.37rem rgba(0, 0, 0, 0);
-  }
   &::-webkit-scrollbar-thumb {
     background-color: ${colors.lilyWhite};
     border-radius: 0.28rem;
     margin-left: 8px;
+  }
+  &::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 0.37rem rgba(0, 0, 0, 0);
   }
 `;
 
@@ -29,12 +29,12 @@ const LabelContainer = styled.div`
 
 interface ListProps {
   deletePlayer?: Function;
-  label: string;
   items: PlayerType[];
+  label: string;
   toggleIsSeeded?: Function;
 }
 
-const List = ({ deletePlayer, label, items, toggleIsSeeded }: ListProps) => {
+const List = ({ deletePlayer, items, label, toggleIsSeeded }: ListProps) => {
   return (
     <ListContainer>
       {label && (
@@ -43,13 +43,13 @@ const List = ({ deletePlayer, label, items, toggleIsSeeded }: ListProps) => {
         </LabelContainer>
       )}
       {items.map((item) => {
-        const { avatar, name, isSeeded } = item;
+        const { avatar, isSeeded, name } = item;
         return (
           <ListRow
             avatar={avatar}
             deletePlayer={deletePlayer}
-            name={name}
             isSeeded={isSeeded}
+            name={name}
             toggleIsSeeded={toggleIsSeeded}
           />
         );
