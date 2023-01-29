@@ -10,7 +10,6 @@ import { colors, typography } from 'utils/colors';
 
 import styled from '@emotion/styled';
 import useGroupRandomizer from './hooks/useGroupRandomizer';
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const DoughnutContainer = styled.div`

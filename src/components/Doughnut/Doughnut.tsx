@@ -31,14 +31,16 @@ interface DoughnutProps {
   data: PlayerType[];
 }
 
+/** TODO 
 interface PluginType {
   id: string;
   beforeDraw: (chart: any) => void;
 }
+*/
 
 const Doughnut = ({ data }: DoughnutProps) => {
   const chartData = useMemo(() => convertPlayerData(data), [data]);
-  // TODO: fix this part to print the number in the center
+  /* TODO: fix this part to print the number in the center
   const plugin = {
     id: 'custom_number_center',
     beforeDraw: function (chart: any) {
@@ -56,7 +58,7 @@ const Doughnut = ({ data }: DoughnutProps) => {
       ctx.fillText(text, textX, textY);
       ctx.save();
     },
-  };
+  };*/
 
   return <ChartDonut data={chartData} options={{ responsive: true }} />;
 };
