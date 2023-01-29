@@ -1,10 +1,11 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Label from 'components/Label';
-import { colors } from 'utils/colors';
 import {
   faStar as faStarSolid,
   faXmark,
 } from '@fortawesome/free-solid-svg-icons';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Label from 'components/Label';
+import { colors } from 'utils/colors';
 import { faStar as faStarRegular } from '@fortawesome/free-regular-svg-icons';
 import styled from '@emotion/styled';
 
@@ -44,16 +45,16 @@ const IconsContainer = styled.div`
 interface ListRowProps {
   avatar: string;
   deletePlayer?: Function;
-  name: string;
   isSeeded: boolean;
+  name: string;
   toggleIsSeeded?: Function;
 }
 
 const ListRow = ({
   avatar,
   deletePlayer,
-  name,
   isSeeded,
+  name,
   toggleIsSeeded,
 }: ListRowProps) => {
   return (
