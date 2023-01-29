@@ -1,32 +1,33 @@
-import { useNavigate } from 'react-router-dom';
-import { TournamentType } from 'types';
-import { Button } from 'components';
-import useGroup from './hook/useGroup';
-import { useTranslation } from 'react-i18next';
 import * as htmlToImage from 'html-to-image';
+
 import {
   Table,
+  TableBody,
+  TableCell,
   TableContainer,
   TableHead,
   TableRow,
-  TableCell,
   tableCellClasses,
-  TableBody,
 } from '@mui/material';
 
-import styled from '@emotion/styled';
+import { Button } from 'components';
+import { TournamentType } from 'types';
 import { colors } from 'utils/colors';
+import styled from '@emotion/styled';
+import useGroup from './hook/useGroup';
+import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+
 const download = require('downloadjs');
 
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
+const StyledTableRow = styled(TableRow)(() => ({
   backgroundColor: colors.lilyWhite,
-  // hide last border
   '&:last-child td, &:last-child th': {
     border: 0,
   },
 }));
 
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
+const StyledTableCell = styled(TableCell)(() => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: colors.dustyRed,
     color: colors.lilyWhite,
@@ -50,25 +51,29 @@ const Group = ({ setTournament, tournament }: GroupProps) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
+  const navigateToGameResult = ({ gameId }: { gameId: number }) => {
+    if (tournament.id && group?.id && gameId) {
+      navigate(
+        t('GameResult.to', {
+          tid: tournament.id,
+          gid: group.id,
+          rid: gameId,
+        }) || ''
+      );
+    }
+  };
+
   return (
     <>
       {group ? (
         <div>
           <h1>{group.name}</h1>
           <br />
-          <h2>Games</h2>
+          <h2>{t('Group.games')}</h2>
           {group.games.map((game) => (
             <Button
               key={game.id}
-              onClick={() =>
-                navigate(
-                  t('GameResult.to', {
-                    tid: tournament.id,
-                    gid: group.id,
-                    rid: game.id,
-                  }) || ''
-                )
-              }
+              onClick={() => navigateToGameResult({ gameId: game.id })}
             >
               Game {game.id}
             </Button>

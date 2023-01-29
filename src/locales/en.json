@@ -11,8 +11,9 @@
     "to": "/tournament/{{tid}}/group/{{gid}}/gameresult/{{rid}}"
   },
   "Group": {
+    "games": "Games",
     "path": "/tournament/:tid/group/:gid",
-    "title": "",
+    "title": "Games",
     "to": "/tournament/{{tid}}/group/{{gid}}"
   },
   "GroupRandomizer": {
