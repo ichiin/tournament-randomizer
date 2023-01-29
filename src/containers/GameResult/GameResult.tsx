@@ -1,23 +1,24 @@
 import {
   Table,
+  TableBody,
+  TableCell,
   TableContainer,
   TableHead,
   TableRow,
-  TableCell,
   tableCellClasses,
-  TableBody,
 } from '@mui/material';
-import { useTranslation } from 'react-i18next';
+
 import { TournamentType } from 'types';
+import { colors } from 'utils/colors';
 import styled from '@emotion/styled';
 import useGameResult from './hooks/useGameResult';
-import { colors } from 'utils/colors';
+import { useTranslation } from 'react-i18next';
 
 const ResultContainer = styled.div`
   margin-top: 100px;
 `;
 
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
+const StyledTableCell = styled(TableCell)(() => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: colors.dustyRed,
     color: colors.darkJungleGreen,
@@ -27,9 +28,8 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   },
 }));
 
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
+const StyledTableRow = styled(TableRow)(() => ({
   backgroundColor: colors.lilyWhite,
-  // hide last border
   '&:last-child td, &:last-child th': {
     border: 0,
   },
@@ -56,12 +56,12 @@ const GameResult = ({ tournament }: GameResultProps) => {
               >
                 <TableHead>
                   <StyledTableRow>
-                    <TableCell>Rank</TableCell>
-                    <TableCell>Name</TableCell>
-                    <TableCell>Placement</TableCell>
-                    <TableCell>Kills</TableCell>
-                    <TableCell>Damage</TableCell>
-                    <TableCell>Score</TableCell>
+                    <TableCell>{t('GameResult.tableRank')}</TableCell>
+                    <TableCell>{t('GameResult.tableName')}</TableCell>
+                    <TableCell>{t('GameResult.tablePlacement')}</TableCell>
+                    <TableCell>{t('GameResult.tableKills')}</TableCell>
+                    <TableCell>{t('GameResult.tableDamage')}</TableCell>
+                    <TableCell>{t('GameResult.tableScore')}</TableCell>
                   </StyledTableRow>
                 </TableHead>
                 <TableBody>

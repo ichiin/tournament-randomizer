@@ -2,6 +2,12 @@
   "GameResult": {
     "path": "/tournament/:tid/group/:gid/gameresult/:rid",
     "title": "Game {{id}}",
+    "tableRank": "Rank",
+    "tableName": "Name",
+    "tablePlacement": "Placement",
+    "tableKills": "Kills",
+    "tableDamage": "Damage",
+    "tableScore": "Score",
     "to": "/tournament/{{tid}}/group/{{gid}}/gameresult/{{rid}}"
   },
   "Group": {
