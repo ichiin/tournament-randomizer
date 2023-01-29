@@ -17,11 +17,11 @@ const convertPlayerData = (data: PlayerType[]) => {
   return {
     datasets: [
       {
-        label: 'Regular',
-        data: getPlayerGroupsSize(data),
         backgroundColor: [colors.cornYellow, colors.dustyRed],
         borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)'],
         borderWidth: 1,
+        data: getPlayerGroupsSize(data),
+        label: 'Regular',
       },
     ],
   };
