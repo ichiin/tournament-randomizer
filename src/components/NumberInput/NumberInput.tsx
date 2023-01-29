@@ -1,7 +1,7 @@
-import { colors, typography } from "utils/colors";
+import { colors, typography } from 'utils/colors';
 
-import { Label } from "components";
-import styled from "@emotion/styled";
+import { Label } from 'components';
+import styled from '@emotion/styled';
 
 const LabelContainer = styled.div`
   margin-bottom: 24px;
@@ -30,11 +30,11 @@ const NumberText = styled.div`
 
 const OperationButton = styled.button`
   align-items: center;
+  background: transparent;
   border: 1px solid ${colors.lilyWhite};
   border-radius: 12px;
-  background: transparent;
   color: ${colors.lilyWhite};
-  cursor: ${(props) => (props.disabled ? "default" : "pointer")};
+  cursor: ${(props) => (props.disabled ? 'default' : 'pointer')};
   display: flex;
   font-size: ${typography.numbers.fontSize};
   font-weight: ${typography.numbers.fontWeight};
