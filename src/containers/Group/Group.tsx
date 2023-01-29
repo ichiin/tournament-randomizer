@@ -65,7 +65,7 @@ const Group = ({ setTournament, tournament }: GroupProps) => {
 
   return (
     <>
-      {group ? (
+      {group && (
         <div>
           <h1>{group.name}</h1>
           <br />
@@ -75,10 +75,9 @@ const Group = ({ setTournament, tournament }: GroupProps) => {
               key={game.id}
               onClick={() => navigateToGameResult({ gameId: game.id })}
             >
-              Game {game.id}
+              {t('Group.game', { id: game.id })}
             </Button>
           ))}
-          <label>Upload Game results below</label>
           <input
             accept='.csv'
             onChange={(e) => {
@@ -103,7 +102,7 @@ const Group = ({ setTournament, tournament }: GroupProps) => {
                   });
               }}
             >
-              Download Result Image
+              {t('Group.downloadButton')}
             </Button>
             <TableContainer id='result-table' style={{ overflow: 'hidden' }}>
               <Table
@@ -113,10 +112,12 @@ const Group = ({ setTournament, tournament }: GroupProps) => {
               >
                 <TableHead>
                   <StyledTableRow>
-                    <StyledTableCell>Rank</StyledTableCell>
-                    <StyledTableCell>Name</StyledTableCell>
+                    <StyledTableCell>{t('Group.tableRank')}</StyledTableCell>
+                    <StyledTableCell>{t('Group.tableName')}</StyledTableCell>
                     {group.games.map((game) => (
-                      <StyledTableCell>Game {game.id}</StyledTableCell>
+                      <StyledTableCell key={`header-game-${game.id}`}>
+                        {t('Group.game', { id: game.id })}
+                      </StyledTableCell>
                     ))}
                     <StyledTableCell>Score</StyledTableCell>
                   </StyledTableRow>
@@ -132,7 +133,9 @@ const Group = ({ setTournament, tournament }: GroupProps) => {
                       </TableCell>
                       <TableCell>{player.name}</TableCell>
                       {group.games.map((game) => (
-                        <TableCell>
+                        <TableCell
+                          key={`score-game-${game.id}-player-${player.name}`}
+                        >
                           {game.standings.find(
                             (gamePlayer) =>
                               gamePlayer.playerName === player.name
@@ -141,7 +144,7 @@ const Group = ({ setTournament, tournament }: GroupProps) => {
                                 (gamePlayer) =>
                                   gamePlayer.playerName === player.name
                               )?.score
-                            : '-'}
+                            : t('Group.playerMissing')}
                         </TableCell>
                       ))}
                       <TableCell>{player.score}</TableCell>
@@ -152,8 +155,6 @@ const Group = ({ setTournament, tournament }: GroupProps) => {
             </TableContainer>
           </ResultContainer>
         </div>
-      ) : (
-        <p>Error fetching group</p>
       )}
     </>
   );

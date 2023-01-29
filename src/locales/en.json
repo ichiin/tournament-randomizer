@@ -11,8 +11,13 @@
     "to": "/tournament/{{tid}}/group/{{gid}}/gameresult/{{rid}}"
   },
   "Group": {
+    "downloadButton": "Download results",
+    "game": "Game {{id}}",
     "games": "Games",
     "path": "/tournament/:tid/group/:gid",
+    "playerMissing": "-",
+    "tableRank": "Rank",
+    "tableName": "Name",
     "title": "Games",
     "to": "/tournament/{{tid}}/group/{{gid}}"
   },
