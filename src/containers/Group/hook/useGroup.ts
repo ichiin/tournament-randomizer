@@ -3,6 +3,37 @@ import { TournamentType, CSVGameResultType } from 'types';
 import Papa from 'papaparse';
 import { getTournament, uploadGameResult } from 'api/database';
 
+//Function to filter games by id, startId and endId are inclusive
+function filterGames(array, startId, endId) {
+  return array.filter(item => item.id >= startId && item.id <= endId);
+};
+
+
+//Function to calculate total score for each player in the filtered games
+function playersTotalScore(array) {
+  let playerScores = [];
+
+  array.forEach(game => {
+      game.standings.forEach(player => {
+          let existingPlayer = playerScores.find(p => p.playerName === player.playerName);
+          if (existingPlayer) {
+              existingPlayer.score += player.score;
+          } else {
+              playerScores.push({ playerName: player.playerName, score: player.score });
+          }
+      });
+  });
+
+  return playerScores
+      .map(player => {
+          return {
+              playerName: player.playerName,
+              score: Number(player.score.toFixed(1))
+          };
+      })
+      .sort((a, b) => b.score - a.score);
+};
+
 interface useGroupProps {
   tournament: TournamentType;
 }
