@@ -1,37 +1,72 @@
-import { useLocation } from 'react-router-dom';
-import { TournamentType, CSVGameResultType } from 'types';
-import Papa from 'papaparse';
+import { CSVGameResultType, TournamentType } from 'types';
+import type { GroupType, StandingType } from 'types';
 import { getTournament, uploadGameResult } from 'api/database';
 
-//Function to filter games by id, startId and endId are inclusive
-function filterGames(array, startId, endId) {
-  return array.filter(item => item.id >= startId && item.id <= endId);
-};
+import { NUMBER_GROUPED_GAMES } from 'utils/config';
+import Papa from 'papaparse';
+import { useLocation } from 'react-router-dom';
 
+//Function to filter games by id, startId and endId are inclusive
+function filterGamesById(array: any[], startId: number, endId: number) {
+  return array.filter((item) => item.id >= startId && item.id <= endId);
+}
 
 //Function to calculate total score for each player in the filtered games
-function playersTotalScore(array) {
-  let playerScores = [];
+function getGroupedGamesScore(group: GroupType[]) {
+  let playerScores: StandingType[] = [];
 
-  array.forEach(game => {
-      game.standings.forEach(player => {
-          let existingPlayer = playerScores.find(p => p.playerName === player.playerName);
-          if (existingPlayer) {
-              existingPlayer.score += player.score;
-          } else {
-              playerScores.push({ playerName: player.playerName, score: player.score });
-          }
-      });
+  group.forEach((group) => {
+    group.standings.forEach((player) => {
+      let existingPlayer = playerScores.find(
+        (p) => p.playerName === player.playerName
+      );
+      if (existingPlayer) {
+        existingPlayer.score += player.score;
+      } else {
+        playerScores.push({
+          playerName: player.playerName,
+          score: player.score,
+        });
+      }
+    });
   });
 
   return playerScores
-      .map(player => {
-          return {
-              playerName: player.playerName,
-              score: Number(player.score.toFixed(1))
-          };
-      })
-      .sort((a, b) => b.score - a.score);
+    .map((player) => {
+      return {
+        playerName: player.playerName,
+        score: Number(player.score.toFixed(1)),
+      };
+    })
+    .sort((a, b) => b.score - a.score);
+}
+
+const getGroupedGames = ({
+  group,
+  nbGroupedGames,
+}: {
+  group: GroupType | undefined;
+  nbGroupedGames: number;
+}) => {
+  if (group) {
+    const { games } = group;
+    if (games.length > nbGroupedGames) {
+      let groupedGamesScores = [];
+      /* Game numbers starts at 1 */
+      let startGameId = 1;
+      let endGameId = startGameId + (nbGroupedGames - 1);
+      for (let i = 0; i < games.length + 1; i++) {
+        if (i === endGameId) {
+          const gamesGroup = filterGamesById(games, startGameId, endGameId);
+          groupedGamesScores.push(getGroupedGamesScore(gamesGroup));
+          startGameId = endGameId + 1;
+          endGameId = startGameId + (nbGroupedGames - 1);
+        }
+      }
+      return groupedGamesScores;
+    }
+  }
+  return undefined;
 };
 
 interface useGroupProps {
@@ -44,6 +79,10 @@ const useGroup = ({ tournament }: useGroupProps) => {
   // Last element of the URL is the group id
   const groupId = Number.parseInt(splitPath[splitPath.length - 1]);
   const group = tournament.groups?.find((group) => group.id === groupId);
+  const groupedGames = getGroupedGames({
+    group,
+    nbGroupedGames: NUMBER_GROUPED_GAMES,
+  });
   const results =
     group?.standings.map((player) => {
       return {
@@ -70,7 +109,6 @@ const useGroup = ({ tournament }: useGroupProps) => {
       complete: async function (results) {
         const gameResult: CSVGameResultType[] = results.data
           .map((row: any) => {
-            console.log(row);
             return {
               KillCount: parseInt(row.KillCount),
               PlayerName: row.PlayerName,
@@ -89,6 +127,7 @@ const useGroup = ({ tournament }: useGroupProps) => {
 
   return {
     group,
+    groupedGames,
     parseFile,
     results,
   };
