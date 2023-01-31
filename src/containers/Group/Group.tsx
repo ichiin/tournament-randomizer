@@ -158,6 +158,7 @@ const Group = ({ setTournament, tournament }: GroupProps) => {
               <FormControlLabel
                 control={
                   <Checkbox
+                    defaultChecked
                     onChange={(event) => setGroupGames(event.target.checked)}
                     sx={{ color: colors.lilyWhite }}
                     value={groupGames}
