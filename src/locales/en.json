@@ -14,6 +14,7 @@
     "downloadButton": "Download results",
     "game": "Game {{id}}",
     "games": "Games",
+    "groupGamesCheckbox": "Group games",
     "path": "/tournament/:tid/group/:gid",
     "playerMissing": "-",
     "tableRank": "Rank",
