@@ -23,8 +23,6 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-const download = require('downloadjs');
-
 const StyledTableRow = styled(TableRow)(() => ({
   backgroundColor: colors.lilyWhite,
   '&:last-child td, &:last-child th': {
@@ -148,7 +146,12 @@ const Group = ({ setTournament, tournament }: GroupProps) => {
                 htmlToImage
                   .toPng(document.getElementById('result-table')!)
                   .then(function (dataUrl) {
-                    download(dataUrl, 'results.png');
+                    const link = document.createElement('a')
+                    link.setAttribute('href', dataUrl)
+                    link.setAttribute('download', 'group-results.png');
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
                   });
               }}
             >
