@@ -139,9 +139,10 @@ const GroupRandomizer = () => {
           />
         </SectionContainer>
         <ParameterSectionContainer>
+        {/*
           <DoughnutContainer>
             <Doughnut data={playerList} />
-          </DoughnutContainer>
+  </DoughnutContainer>*/}
           <GenerationParameterContainer>
             <GenerationGroupNumberInputContainer>
               <NumberInput
