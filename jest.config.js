@@ -3,7 +3,7 @@ module.exports = {
         "node_modules",
         "src"
     ],
-    setupFilesAfterEnv: ["./setupTests.js"],
+    setupFilesAfterEnv: ["./jest.setup.js"],
     testEnvironment: "jsdom",
     transform: {
         "^.+\\.(ts|js|tsx|jsx)$": "@swc/jest",

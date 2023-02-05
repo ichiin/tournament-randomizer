@@ -1,10 +1,14 @@
-import axios from 'axios';
-import { CSVGameResultType } from 'types';
 import { BACK_ENDPOINT } from 'utils/config';
+import { CSVGameResultType } from 'types';
+import axios from 'axios';
 
 export const getTournament = async ({ id }: { id: number }) => {
+  try {
   const tournament = await axios.get(`${BACK_ENDPOINT}/tournament/${id}`);
   return tournament.data;
+  } catch(error){
+  console.log('Error retrieving tournaments data');
+  }
 };
 
 export const getTournaments = async () => {

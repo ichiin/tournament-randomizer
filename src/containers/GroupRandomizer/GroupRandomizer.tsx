@@ -112,8 +112,6 @@ const GroupRandomizer = () => {
     toggleIsSeeded,
   } = useGroupRandomizer();
 
-  console.log(playerList);
-
   return (
     <GroupRandomizerContainer>
       <Title>{t('GroupRandomizer.title')}</Title>
