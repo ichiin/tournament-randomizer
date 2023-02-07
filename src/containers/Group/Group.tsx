@@ -44,13 +44,8 @@ const ResultContainer = styled.div`
   margin-top: 100px;
 `;
 
-interface GroupProps {
-  setTournament: Function;
-  tournament: TournamentType;
-}
-
-const Group = ({ setTournament, tournament }: GroupProps) => {
-  const { group, groupedGames, parseFile, results } = useGroup({ tournament });
+const Group = () => {
+  const { group, groupedGames, parseFile, results } = useGroup();
   const { t } = useTranslation();
   const [groupGames, setGroupGames] = useState(true);
   const navigate = useNavigate();

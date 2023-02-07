@@ -5,6 +5,7 @@ import { getTournament, uploadGameResult } from 'api/database';
 import { NUMBER_GROUPED_GAMES } from 'utils/config';
 import Papa from 'papaparse';
 import { useLocation } from 'react-router-dom';
+import { useQuery } from 'react-query';
 
 //Function to filter games by id, startId and endId are inclusive
 function filterGamesById(array: any[], startId: number, endId: number) {
@@ -73,11 +74,14 @@ interface useGroupProps {
   tournament: TournamentType;
 }
 
-const useGroup = ({ tournament }: useGroupProps) => {
+const useGroup = () => {
   const { pathname } = useLocation();
   const splitPath = pathname.split('/');
+  const tournamentId =  Number.parseInt(pathname.split('/')[pathname.split('/').length - 2]);
+  const { data: tournament } = useQuery<TournamentType>('getTournament', () => getTournament({ id: tournamentId}));
   // Last element of the URL is the group id
   const groupId = Number.parseInt(splitPath[splitPath.length - 1]);
+
   const group = tournament.groups?.find((group) => group.id === groupId);
   const groupedGames = getGroupedGames({
     group,
