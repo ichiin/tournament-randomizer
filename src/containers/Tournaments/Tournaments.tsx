@@ -1,18 +1,22 @@
 import { Button } from 'components';
 import { TournamentType } from 'types';
+import { getTournaments } from 'api/database'
 import { useNavigate } from 'react-router-dom';
+import {useQuery} from 'react-query';
 import { useTranslation } from 'react-i18next';
 
 interface TournamentsProps {
   tournaments: TournamentType[];
 }
 
-const Tournaments = ({ tournaments }: TournamentsProps) => {
+const Tournaments = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { data: tournaments } = useQuery<TournamentType[]>('getTournaments', getTournaments);
+  
   return (
     <>
-      {tournaments.length > 0 &&
+      {tournaments && tournaments.length > 0 &&
         tournaments.map((tournament) => (
           <Button
             key={tournament.id}
