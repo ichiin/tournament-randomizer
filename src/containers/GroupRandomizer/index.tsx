@@ -1,1 +1,1 @@
-export { default } from './GroupRandomizer';
+export { default } from './GroupRandomizer'

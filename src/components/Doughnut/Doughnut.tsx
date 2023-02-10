@@ -1,34 +1,34 @@
-import { ArcElement, Chart as ChartJS, Legend, Tooltip } from 'chart.js';
+import { ArcElement, Chart as ChartJS, Legend, Tooltip } from 'chart.js'
 
-import { Doughnut as ChartDonut } from 'react-chartjs-2';
-import { PlayerType } from 'utils/types';
-import { colors } from 'utils/colors';
-import { useMemo } from 'react';
+import { Doughnut as ChartDonut } from 'react-chartjs-2'
+import { PlayerType } from 'utils/types'
+import { colors } from 'utils/colors'
+import { useMemo } from 'react'
 
-ChartJS.register(ArcElement, Tooltip, Legend);
+ChartJS.register(ArcElement, Tooltip, Legend)
 
 const getPlayerGroupsSize = (data: PlayerType[]) => {
-  const nbRegulars = data.filter((player) => !player.isSeeded).length;
-  const nbSeeded = data.length - nbRegulars;
-  return [nbSeeded, nbRegulars];
-};
+    const nbRegulars = data.filter((player) => !player.isSeeded).length
+    const nbSeeded = data.length - nbRegulars
+    return [nbSeeded, nbRegulars]
+}
 
 const convertPlayerData = (data: PlayerType[]) => {
-  return {
-    datasets: [
-      {
-        backgroundColor: [colors.cornYellow, colors.dustyRed],
-        borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)'],
-        borderWidth: 1,
-        data: getPlayerGroupsSize(data),
-        label: 'Regular',
-      },
-    ],
-  };
-};
+    return {
+        datasets: [
+            {
+                backgroundColor: [colors.cornYellow, colors.dustyRed],
+                borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)'],
+                borderWidth: 1,
+                data: getPlayerGroupsSize(data),
+                label: 'Regular',
+            },
+        ],
+    }
+}
 
 interface DoughnutProps {
-  data: PlayerType[];
+    data: PlayerType[]
 }
 
 /** TODO 
@@ -39,8 +39,8 @@ interface PluginType {
 */
 
 const Doughnut = ({ data }: DoughnutProps) => {
-  const chartData = useMemo(() => convertPlayerData(data), [data]);
-  /* TODO: fix this part to print the number in the center
+    const chartData = useMemo(() => convertPlayerData(data), [data])
+    /* TODO: fix this part to print the number in the center
   const plugin = {
     id: 'custom_number_center',
     beforeDraw: function (chart: any) {
@@ -60,7 +60,12 @@ const Doughnut = ({ data }: DoughnutProps) => {
     },
   };*/
 
-  return <ChartDonut data={chartData} options={{ responsive: true }} />;
-};
+    return (
+        <ChartDonut
+            data={chartData}
+            options={{ responsive: true }}
+        />
+    )
+}
 
-export default Doughnut;
+export default Doughnut

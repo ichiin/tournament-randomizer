@@ -1,3 +1,3 @@
-import { getRegistratedPlayers } from "./discord";
+import { getRegistratedPlayers } from './discord'
 
-export { getRegistratedPlayers };
+export { getRegistratedPlayers }

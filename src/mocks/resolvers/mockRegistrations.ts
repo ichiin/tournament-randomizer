@@ -1,7 +1,7 @@
-import JSON from './registrations.json';
+import JSON from './registrations.json'
 
 const mockRegistrations = (req, res, ctx) => {
-    return res(ctx.status(200), ctx.json(JSON));
-};
+    return res(ctx.status(200), ctx.json(JSON))
+}
 
-export default mockRegistrations;
+export default mockRegistrations

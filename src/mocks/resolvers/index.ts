@@ -1,7 +1,4 @@
-import mockRegistrations from "./mockRegistrations";
-import mockTournaments from "./mockTournaments";
+import mockRegistrations from './mockRegistrations'
+import mockTournaments from './mockTournaments'
 
-export {
-    mockRegistrations,
-    mockTournaments
-}
+export { mockRegistrations, mockTournaments }
